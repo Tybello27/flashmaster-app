@@ -1,0 +1,75 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+
+  /* Primary — sky blue */
+  --color-primary-50: #f0f9ff;
+  --color-primary-100: #e0f2fe;
+  --color-primary-200: #bae6fd;
+  --color-primary-300: #7dd3fc;
+  --color-primary-400: #38bdf8;
+  --color-primary-500: #0ea5e9;
+  --color-primary-600: #0284c7;
+  --color-primary-700: #0369a1;
+  --color-primary-800: #075985;
+  --color-primary-900: #0c4a6e;
+
+  /* Grays — high-contrast neutral scale */
+  --color-gray-50: #f9fafb;
+  --color-gray-100: #f3f4f6;
+  --color-gray-200: #e5e7eb;
+  --color-gray-300: #d1d5db;
+  --color-gray-400: #9ca3af;
+  --color-gray-500: #6b7280;
+  --color-gray-600: #4b5563;
+  --color-gray-700: #374151;
+  --color-gray-800: #1f2937;
+  --color-gray-900: #111827;
+}
+
+@layer base {
+  html {
+    color-scheme: light;
+    font-family: var(--font-sans);
+    -webkit-tap-highlight-color: transparent;
+  }
+  html.dark {
+    color-scheme: dark;
+  }
+  /* Global text-color defaults enforce contrast everywhere. */
+  body {
+    background-color: #f3f4f6; /* gray-100 for app shell */
+    color: #111827;            /* gray-900 default text on light */
+    min-height: 100dvh;
+    margin: 0;
+    -webkit-font-smoothing: antialiased;
+  }
+  html.dark body {
+    background-color: #0f172a; /* slate-900 for app shell in dark */
+    color: #f9fafb;            /* gray-50 default text on dark */
+  }
+
+  /* Make sure headings and links inherit strong contrast automatically */
+  h1, h2, h3, h4, h5, h6 { color: inherit; font-weight: 700; }
+  p, span, div, label, a { color: inherit; }
+
+  button, input, textarea, select { font-family: inherit; color: inherit; }
+  /* Prevent iOS zooming on focus */
+  input, textarea, select { font-size: 16px; }
+}
+
+@layer utilities {
+  .safe-bottom { padding-bottom: max(env(safe-area-inset-bottom), 0px); }
+  .safe-top { padding-top: max(env(safe-area-inset-top), 0px); }
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  .no-scrollbar { scrollbar-width: none; }
+
+  /* Semantic text tokens — use these instead of raw gray classes */
+  .text-body       { color: #111827; }
+  .text-muted      { color: #4b5563; } /* gray-600 — passes AA on white */
+  .text-subtle     { color: #374151; } /* gray-700 — extra safe */
+  .dark .text-body   { color: #f9fafb; }
+  .dark .text-muted  { color: #d1d5db; } /* gray-300 — passes AA on gray-900 */
+  .dark .text-subtle { color: #e5e7eb; }
+}
